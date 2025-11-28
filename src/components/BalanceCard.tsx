@@ -25,7 +25,7 @@ const BalanceCard: React.FC<BalanceCardProps> = ({ transactions }) => {
       <h3 style={{ color, margin: 0 }}>
         {value >= 0 && label !== 'Расходы' ? '+' : ''}{value.toLocaleString('ru-RU')} ₽
       </h3>
-      <p style={{ margin: 0, fontSize: '14px', color: '#6c757d' }}>{label}</p>
+      <p style={{ margin: 0, fontSize: '15px', color: '#6c757d' }}>{label}</p>
     </div>
   );
 

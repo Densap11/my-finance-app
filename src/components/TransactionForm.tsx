@@ -59,7 +59,7 @@ const TransactionForm: React.FC<TransactionFormProps> = ({ onSubmit, isLoading =
 
   return (
     <div className="transaction-form" style={{ marginBottom: '30px', padding: '20px', border: '1px solid #ddd', borderRadius: '8px' }}>
-      <h3>Добавить транзакцию</h3>
+      <h2>Добавить транзакцию</h2>
       <form onSubmit={handleSubmit}>
         <div style={{ display: 'flex', gap: '15px', marginBottom: '15px' }}>
           <button
@@ -72,7 +72,8 @@ const TransactionForm: React.FC<TransactionFormProps> = ({ onSubmit, isLoading =
               border: 'none',
               borderRadius: '4px',
               cursor: 'pointer',
-              flex: 1
+              flex: 1,
+              fontSize: '18px',
             }}
           >
             💰 Доход
@@ -87,7 +88,8 @@ const TransactionForm: React.FC<TransactionFormProps> = ({ onSubmit, isLoading =
               border: 'none',
               borderRadius: '4px',
               cursor: 'pointer',
-              flex: 1
+              flex: 1,
+              fontSize: '18px',
             }}
           >
             💸 Расход
@@ -158,7 +160,8 @@ const TransactionForm: React.FC<TransactionFormProps> = ({ onSubmit, isLoading =
             border: 'none',
             borderRadius: '4px',
             cursor: 'pointer',
-            width: '100%'
+            width: '100%',
+            fontSize: '18px',
           }}
         >
           {isLoading ? 'Добавление...' : `Добавить ${formData.type === 'income' ? 'доход' : 'расход'}`}
