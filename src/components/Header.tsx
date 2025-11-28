@@ -8,7 +8,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ userName, onLogout }) => {
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
-      <h1>💰 Финансовый трекер</h1>
+      <h1>DSfin</h1>
       <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
         <span>Привет, {userName}!</span>
         <button 

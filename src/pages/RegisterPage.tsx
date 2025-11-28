@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { RegisterFormData } from '../types';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext'; // Добавьте этот импорт
+import { useAuth } from '../contexts/AuthContext';
 
 const RegisterPage: React.FC = () => {
   const [formData, setFormData] = useState<RegisterFormData>({
@@ -11,33 +11,68 @@ const RegisterPage: React.FC = () => {
     confirmPassword: ''
   });
   
-  const { register, isLoading, error } = useAuth(); // Добавьте useAuth
+  const { register, isLoading, error } = useAuth();
 
-  const handleSubmit = async (e: React.FormEvent) => { // Сделайте функцию async
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Проверка совпадения паролей
     if (formData.password !== formData.confirmPassword) {
       alert('Пароли не совпадают!');
       return;
     }
     
     try {
-      console.log('Register data:', formData);
-      await register(formData); // Вызов функции регистрации из контекста
-      // После успешной регистрации пользователь автоматически перенаправится на главную
+      await register(formData);
     } catch (error) {
-      // Ошибка уже обработана в контексте
       console.error('Registration error:', error);
     }
+  };
+
+  // Функция для красивого отображения ошибок регистрации
+  const getErrorMessage = (error: string | null) => {
+    if (!error) return null;
+    
+    const errorMessages: { [key: string]: string } = {
+      'User already exists': 'Пользователь с таким email уже существует',
+      'Invalid credentials': 'Неверные данные',
+      'Network Error': 'Ошибка соединения с сервером',
+      'default': 'Произошла ошибка при регистрации'
+    };
+
+    return errorMessages[error] || errorMessages['default'];
   };
 
   return (
     <div className="register-page">
       <h1>Регистрация</h1>
       
-      {/* Показываем ошибки если есть */}
-      {error && <div className="error-message" style={{color: 'red', marginBottom: '15px'}}>{error}</div>}
+      {/* Красивое отображение ошибки */}
+      {error && (
+        <div style={{
+          backgroundColor: '#fee',
+          border: '1px solid #f5c6cb',
+          color: '#721c24',
+          padding: '12px 16px',
+          borderRadius: '8px',
+          marginBottom: '20px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '10px'
+        }}>
+          <span style={{
+            display: 'inline-block',
+            width: '20px',
+            height: '20px',
+            backgroundColor: '#dc3545',
+            color: 'white',
+            borderRadius: '50%',
+            textAlign: 'center',
+            lineHeight: '20px',
+            fontSize: '14px'
+          }}>!</span>
+          {getErrorMessage(error)}
+        </div>
+      )}
       
       <form onSubmit={handleSubmit}>
         <div>
