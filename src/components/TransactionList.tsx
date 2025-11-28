@@ -9,10 +9,14 @@ interface TransactionListProps {
 
 const TransactionList: React.FC<TransactionListProps> = ({ transactions, onDelete, isLoading = false }) => {
   const formatCurrency = (amount: number) => {
+    // Преобразуем в число и форматируем
+    const numberAmount = Number(amount);
     return new Intl.NumberFormat('ru-RU', {
       style: 'currency',
-      currency: 'RUB'
-    }).format(amount);
+      currency: 'RUB',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }).format(numberAmount);
   };
 
   const formatDate = (dateString: string) => {
@@ -71,7 +75,7 @@ const TransactionList: React.FC<TransactionListProps> = ({ transactions, onDelet
                   color: transaction.type === 'income' ? '#28a745' : '#dc3545',
                   fontWeight: 'bold'
                 }}>
-                  {transaction.type === 'income' ? '+' : '-'}{formatCurrency(transaction.amount)}
+                  {transaction.type === 'income' ? '+' : '-'}{formatCurrency(Number(transaction.amount))}
                 </td>
                 <td style={{ padding: '12px', textAlign: 'center' }}>
                   <button

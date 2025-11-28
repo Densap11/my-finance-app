@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './Header';
 import BalanceCard from './BalanceCard';
 import TransactionForm from './TransactionForm';
-import TransactionList from './TransactionList';
+import TransactionList from './TransactionList'; // Убедитесь что это исправленная версия
 import { ITransaction, TransactionFormData } from '../types';
 
 interface DashboardProps {
@@ -28,11 +28,10 @@ const Dashboard: React.FC<DashboardProps> = ({
     <div className="dashboard">
       <Header userName={userName} onLogout={onLogout} />
       
-      <div style={{ background: '#f8f9fa', padding: '20px', borderRadius: '8px', marginBottom: '20px' }}>
-        <BalanceCard transactions={transactions} />
-      </div>
+      <BalanceCard transactions={transactions} />
 
       <TransactionForm onSubmit={onAddTransaction} isLoading={isLoading} />
+      
       <TransactionList 
         transactions={transactions} 
         onDelete={onDeleteTransaction} 

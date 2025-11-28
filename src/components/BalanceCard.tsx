@@ -6,14 +6,22 @@ interface BalanceCardProps {
 }
 
 const BalanceCard: React.FC<BalanceCardProps> = ({ transactions }) => {
+  const formatCurrency = (amount: number) => {
+    const numberAmount = Number(amount);
+    return new Intl.NumberFormat('ru-RU', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }).format(numberAmount);
+  };
+
   const calculateBalance = () => {
     const income = transactions
       .filter(t => t.type === 'income')
-      .reduce((sum, t) => sum + t.amount, 0);
+      .reduce((sum, t) => sum + Number(t.amount), 0); // Добавил Number()
     
     const expense = transactions
       .filter(t => t.type === 'expense')
-      .reduce((sum, t) => sum + t.amount, 0);
+      .reduce((sum, t) => sum + Number(t.amount), 0); // Добавил Number()
     
     return { balance: income - expense, income, expense };
   };
@@ -23,7 +31,7 @@ const BalanceCard: React.FC<BalanceCardProps> = ({ transactions }) => {
   const StatBlock: React.FC<{ value: number; label: string; color: string }> = ({ value, label, color }) => (
     <div style={{ textAlign: 'center' }}>
       <h3 style={{ color, margin: 0 }}>
-        {value >= 0 && label !== 'Расходы' ? '+' : ''}{value.toLocaleString('ru-RU')} ₽
+        {value >= 0 && label !== 'Расходы' ? '+' : ''}{formatCurrency(value)} {/* Используем formatCurrency */}
       </h3>
       <p style={{ margin: 0, fontSize: '15px', color: '#6c757d' }}>{label}</p>
     </div>
