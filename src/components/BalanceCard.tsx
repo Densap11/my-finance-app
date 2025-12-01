@@ -29,7 +29,7 @@ const BalanceCard: React.FC<BalanceCardProps> = ({ transactions }) => {
   const { balance, income, expense } = calculateBalance();
 
   const StatBlock: React.FC<{ value: number; label: string; color: string }> = ({ value, label, color }) => (
-    <div style={{ textAlign: 'center' }}>
+    <div style={{ textAlign: 'center', fontSize: '20px'}}>
       <h3 style={{ color, margin: 0 }}>
         {value >= 0 && label !== 'Расходы' ? '+' : ''}{formatCurrency(value)} {/* Используем formatCurrency */}
       </h3>
@@ -40,9 +40,9 @@ const BalanceCard: React.FC<BalanceCardProps> = ({ transactions }) => {
   return (
     <div className="balance-card">
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px' }}>
-        <StatBlock value={balance} label="Баланс" color={balance >= 0 ? '#28a745' : '#dc3545'} />
-        <StatBlock value={income} label="Доходы" color="#28a745" />
-        <StatBlock value={expense} label="Расходы" color="#dc3545" />
+        <StatBlock value={balance} label="Баланс" color={balance >= 0 ? '#AFF019' : '#F08819'} />
+        <StatBlock value={income} label="Доходы" color="#AFF019" />
+        <StatBlock value={expense} label="Расходы" color="#F08819" />
       </div>
     </div>
   );

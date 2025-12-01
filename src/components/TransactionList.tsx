@@ -29,7 +29,7 @@ const TransactionList: React.FC<TransactionListProps> = ({ transactions, onDelet
 
   if (transactions.length === 0) {
     return (
-      <div style={{ textAlign: 'center', padding: '40px', color: '#6c757d' }}>
+      <div style={{ textAlign: 'center', padding: '40px', color: '#A6A6A6' }}>
         <h3>Транзакций пока нет</h3>
         <p>Добавьте первую транзакцию используя форму выше</p>
       </div>
@@ -40,29 +40,24 @@ const TransactionList: React.FC<TransactionListProps> = ({ transactions, onDelet
     <div className="transaction-list">
       <h3>История транзакций</h3>
       <div style={{ overflowX: 'auto' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+        <table style={{ width: '100%', borderCollapse: 'collapse'}}>
           <thead>
-            <tr style={{ backgroundColor: '#f8f9fa' }}>
-              <th style={{ padding: '12px', textAlign: 'left', borderBottom: '1px solid #dee2e6' }}>Дата</th>
-              <th style={{ padding: '12px', textAlign: 'left', borderBottom: '1px solid #dee2e6' }}>Категория</th>
-              <th style={{ padding: '12px', textAlign: 'left', borderBottom: '1px solid #dee2e6' }}>Описание</th>
-              <th style={{ padding: '12px', textAlign: 'right', borderBottom: '1px solid #dee2e6' }}>Сумма</th>
-              <th style={{ padding: '12px', textAlign: 'center', borderBottom: '1px solid #dee2e6' }}>Действия</th>
+            <tr style={{ }}>
+              <th style={{ padding: '12px', textAlign: 'left', borderBottom: '1px solid #A6A6A6', backgroundColor: '#2B2B2B' }}>Дата</th>
+              <th style={{ padding: '12px', textAlign: 'left', borderBottom: '1px solid #A6A6A6', backgroundColor: '#2B2B2B'  }}>Категория</th>
+              <th style={{ padding: '12px', textAlign: 'left', borderBottom: '1px solid #A6A6A6', backgroundColor: '#2B2B2B'  }}>Описание</th>
+              <th style={{ padding: '12px', textAlign: 'right', borderBottom: '1px solid #A6A6A6', backgroundColor: '#2B2B2B'  }}>Сумма</th>
+              <th style={{ padding: '12px', textAlign: 'center', borderBottom: '1px solid #A6A6A6', backgroundColor: '#2B2B2B'  }}>Действия</th>
             </tr>
           </thead>
           <tbody>
             {transactions.map(transaction => (
-              <tr key={transaction.id} style={{ borderBottom: '1px solid #dee2e6' }}>
+              <tr key={transaction.id} style={{ borderBottom: '1px solid #A6A6A6' }}>
                 <td style={{ padding: '12px' }}>{formatDate(transaction.date)}</td>
                 <td style={{ padding: '12px' }}>
-                  <span 
+                  <span className='transaction-list-span'
                     style={{
-                      display: 'inline-block',
-                      padding: '4px 8px',
-                      borderRadius: '4px',
                       backgroundColor: transaction.category_color || '#007bff',
-                      color: 'white',
-                      fontSize: '12px'
                     }}
                   >
                     {transaction.category_name}
@@ -72,7 +67,7 @@ const TransactionList: React.FC<TransactionListProps> = ({ transactions, onDelet
                 <td style={{ 
                   padding: '12px', 
                   textAlign: 'right',
-                  color: transaction.type === 'income' ? '#28a745' : '#dc3545',
+                  color: transaction.type === 'income' ? '#AFF019' : '#F08819',
                   fontWeight: 'bold'
                 }}>
                   {transaction.type === 'income' ? '+' : '-'}{formatCurrency(Number(transaction.amount))}
@@ -81,15 +76,7 @@ const TransactionList: React.FC<TransactionListProps> = ({ transactions, onDelet
                   <button
                     onClick={() => onDelete(transaction.id)}
                     disabled={isLoading}
-                    style={{
-                      padding: '4px 8px',
-                      backgroundColor: '#dc3545',
-                      color: 'white',
-                      border: 'none',
-                      borderRadius: '4px',
-                      cursor: 'pointer',
-                      fontSize: '12px'
-                    }}
+                    className='transaction-list-delete'
                   >
                     Удалить
                   </button>

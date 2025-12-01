@@ -25,9 +25,9 @@ const Dashboard: React.FC<DashboardProps> = ({
   onDeleteTransaction
 }) => {
   return (
-    <div className="dashboard">
+    <div >
       <Header userName={userName} onLogout={onLogout} />
-      
+      <div className="dashboard">
       <BalanceCard transactions={transactions} />
 
       <TransactionForm onSubmit={onAddTransaction} isLoading={isLoading} />
@@ -37,6 +37,8 @@ const Dashboard: React.FC<DashboardProps> = ({
         onDelete={onDeleteTransaction} 
         isLoading={isLoadingTransactions}
       />
+      </div>
+
     </div>
   );
 };

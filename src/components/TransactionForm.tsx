@@ -58,52 +58,25 @@ const TransactionForm: React.FC<TransactionFormProps> = ({ onSubmit, isLoading =
   };
 
   return (
-    <div className="transaction-form" style={{ marginBottom: '30px', padding: '20px', border: '1px solid #ddd', borderRadius: '8px' }}>
-      <h2>Добавить транзакцию</h2>
-      <form onSubmit={handleSubmit}>
-        <div style={{ display: 'flex', gap: '15px', marginBottom: '15px' }}>
-          <button
-            type="button"
-            onClick={() => handleTypeChange('income')}
-            style={{
-              padding: '10px 20px',
-              backgroundColor: formData.type === 'income' ? '#28a745' : '#6c757d',
-              color: 'white',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer',
-              flex: 1,
-              fontSize: '18px',
-            }}
-          >
-            💰 Доход
+    <div className="transaction-form" >
+      <h2 style={{margin: "0px",}}>Добавить транзакцию</h2>
+      <form onSubmit={handleSubmit} style={{display: "flex", flexDirection: "column", height:"auto"}}>
+        <div style={{ display: 'flex', gap: '15px',}}>
+          <button type="button" onClick={() => handleTypeChange('income')} className='transaction-button-income'>
+            Доход
           </button>
-          <button
-            type="button"
-            onClick={() => handleTypeChange('expense')}
-            style={{
-              padding: '10px 20px',
-              backgroundColor: formData.type === 'expense' ? '#dc3545' : '#6c757d',
-              color: 'white',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer',
-              flex: 1,
-              fontSize: '18px',
-            }}
-          >
-            💸 Расход
+          <button type="button" onClick={() => handleTypeChange('expense')} className='transaction-button-expense'>
+            Расход
           </button>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', marginBottom: '15px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', margin: '0'}}>
           <div>
-            <label>Сумма:</label>
-            <input
+            <label className='transaction-form-lable'>Сумма:</label>
+            <input className='transaction-form-input'
               type="number"
-              step="0.01"
+              step="100"
               value={formData.amount}
-              onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
               required
               disabled={isLoading}
               placeholder="0.00"
@@ -111,8 +84,8 @@ const TransactionForm: React.FC<TransactionFormProps> = ({ onSubmit, isLoading =
           </div>
 
           <div>
-            <label>Дата:</label>
-            <input
+            <label className='transaction-form-lable'>Дата:</label>
+            <input className='transaction-form-input'
               type="date"
               value={formData.date}
               onChange={(e) => setFormData({ ...formData, date: e.target.value })}
@@ -122,9 +95,9 @@ const TransactionForm: React.FC<TransactionFormProps> = ({ onSubmit, isLoading =
           </div>
         </div>
 
-        <div style={{ marginBottom: '15px' }}>
-          <label>Категория:</label>
-          <select
+        <div>
+          <label className='transaction-form-lable'>Категория:</label>
+          <select className='transaction-form-input'
             value={formData.category_id}
             onChange={(e) => setFormData({ ...formData, category_id: parseInt(e.target.value) })}
             required
@@ -140,8 +113,8 @@ const TransactionForm: React.FC<TransactionFormProps> = ({ onSubmit, isLoading =
         </div>
 
         <div style={{ marginBottom: '15px' }}>
-          <label>Описание:</label>
-          <input
+          <label className='transaction-form-lable'>Описание:</label>
+          <input className='transaction-form-input'
             type="text"
             value={formData.description}
             onChange={(e) => setFormData({ ...formData, description: e.target.value })}
@@ -153,15 +126,9 @@ const TransactionForm: React.FC<TransactionFormProps> = ({ onSubmit, isLoading =
         <button 
           type="submit" 
           disabled={isLoading}
+          className='transaction-button-submit'
           style={{
-            padding: '10px 20px',
-            backgroundColor: formData.type === 'income' ? '#28a745' : '#dc3545',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: 'pointer',
-            width: '100%',
-            fontSize: '18px',
+            backgroundColor: formData.type === 'income' ? '#AFF019' : '#F08819',
           }}
         >
           {isLoading ? 'Добавление...' : `Добавить ${formData.type === 'income' ? 'доход' : 'расход'}`}

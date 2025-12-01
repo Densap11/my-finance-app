@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { ITransaction } from '../types';
 import { transactionService } from '../services/transactionService';
 import StatisticsCards from '../components/analytics/StatisticsCards';
 import MonthlyChart from '../components/charts/MonthlyChart';
 import CategoryPieChart from '../components/charts/CategoryPieChart';
+import { useAuth } from '../contexts/AuthContext'; // Добавьте этот импорт
+import Header from '../components/Header';
+
+
+
 
 const DashboardPage: React.FC = () => {
-  const navigate = useNavigate();
+  const { logout } = useAuth(); // Получаем функцию logout
   const [transactions, setTransactions] = useState<ITransaction[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -36,34 +40,12 @@ const DashboardPage: React.FC = () => {
 
   return (
     <div className="dashboard-page">
+      <Header userName="" onLogout={logout} />
       <div style={{ marginBottom: '30px' }}>
         <h1>Аналитика финансов</h1>
         <p style={{ color: '#666', marginTop: '10px' }}>
           Статистика и визуализация ваших доходов и расходов
         </p>
-      </div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '30px' }}>
-        <div>
-          <button 
-            onClick={() => navigate('/')}
-            style={{
-              padding: '8px 16px',
-              backgroundColor: 'transparent',
-              color: '#007bff',
-              border: '1px solid #007bff',
-              borderRadius: '4px',
-              cursor: 'pointer',
-              fontSize: '14px',
-              marginBottom: '10px'
-            }}
-          >
-            ← На главную
-          </button>
-          <h1 style={{ margin: 0 }}>Аналитика финансов</h1>
-          <p style={{ color: '#666', marginTop: '5px' }}>
-            Статистика и визуализация ваших доходов и расходов
-          </p>
-        </div>
       </div>
       <StatisticsCards transactions={transactions} />
 
