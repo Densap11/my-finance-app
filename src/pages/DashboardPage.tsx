@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ITransaction } from '../types';
 import { transactionService } from '../services/transactionService';
+import RecentTransactions from '../components/RecentTransactions';
 import StatisticsCards from '../components/analytics/StatisticsCards';
 import MonthlyChart from '../components/charts/MonthlyChart';
 import CategoryPieChart from '../components/charts/CategoryPieChart';
@@ -40,133 +41,41 @@ const DashboardPage: React.FC = () => {
 
   return (
     <div className="dashboard-page">
-      <Header userName="" onLogout={logout} />
-      <div style={{ marginBottom: '30px' }}>
-        <h1>Аналитика финансов</h1>
-        <p style={{ color: '#666', marginTop: '10px' }}>
+      <Header onLogout={logout} />
+      <div style={{ marginBottom: '30px'}}>
+        <h1 style={{color: "white"}}>Аналитика финансов</h1>
+        <p style={{ color: '#A6A6A6', marginTop: '10px' }}>
           Статистика и визуализация ваших доходов и расходов
         </p>
       </div>
       <StatisticsCards transactions={transactions} />
 
       {/* Реальные графики */}
-      <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: '1fr 1fr', 
-        gap: '20px', 
-        marginTop: '30px' 
-      }}>
+      <div className='chartGrid'>
         {/* График доходов/расходов */}
-        <div style={{
-          padding: '20px',
-          border: '1px solid #ddd',
-          borderRadius: '8px',
-          backgroundColor: 'white'
-        }}>
-          <h3 style={{ marginBottom: '15px' }}>Доходы и расходы по месяцам</h3>
+        <div className='ChartDashboard'>
+          <h3 style={{ margin:'auto' }}>Доходы и расходы по месяцам</h3>
           <MonthlyChart transactions={transactions} />
         </div>
 
         {/* Круговая диаграмма расходов */}
-        <div style={{
-          padding: '20px',
-          border: '1px solid #ddd',
-          borderRadius: '8px',
-          backgroundColor: 'white'
-        }}>
-          <h3 style={{ marginBottom: '15px' }}>Расходы по категориям</h3>
+        <div className='ChartDashboard'>
+          <h3 style={{ margin:'auto' }}>Расходы по категориям</h3>
           <CategoryPieChart transactions={transactions} type="expense" />
         </div>
-      </div>
 
-      {/* Второй ряд графиков */}
-      <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: '1fr 1fr', 
-        gap: '20px', 
-        marginTop: '20px' 
-      }}>
         {/* Круговая диаграмма доходов */}
-        <div style={{
-          padding: '20px',
-          border: '1px solid #ddd',
-          borderRadius: '8px',
-          backgroundColor: 'white'
-        }}>
-          <h3 style={{ marginBottom: '15px' }}>Доходы по категориям</h3>
+        <div className='ChartDashboard'>
+          <h3 style={{ margin:'auto' }}>Доходы по категориям</h3>
           <CategoryPieChart transactions={transactions} type="income" />
         </div>
 
         {/* Последние транзакции */}
-        <div style={{
-          padding: '20px',
-          border: '1px solid #ddd',
-          borderRadius: '8px',
-          backgroundColor: 'white'
-        }}>
-          <h3 style={{ marginBottom: '15px' }}>Последние транзакции</h3>
+        <div className='ChartDashboard'>
+          <h3 style={{ margin:'auto' }}>Последние транзакции</h3>
           <RecentTransactions transactions={transactions.slice(0, 5)} />
         </div>
       </div>
-    </div>
-  );
-};
-
-// Компонент последних транзакций
-const RecentTransactions: React.FC<{ transactions: ITransaction[] }> = ({ transactions }) => {
-  // Функция для форматирования валюты
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('ru-RU', {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }).format(amount);
-  };
-
-  if (transactions.length === 0) {
-    return <div style={{ color: '#666', textAlign: 'center', padding: '20px' }}>Нет транзакций</div>;
-  }
-
-  return (
-    <div>
-      {transactions.map((transaction) => (
-        <div
-          key={transaction.id}
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            padding: '12px 0',
-            borderBottom: '1px solid #f0f0f0'
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <div
-              style={{
-                width: '12px',
-                height: '12px',
-                borderRadius: '50%',
-                backgroundColor: transaction.category_color || '#007bff'
-              }}
-            ></div>
-            <div>
-              <div style={{ fontWeight: '500' }}>{transaction.category_name}</div>
-              <div style={{ fontSize: '12px', color: '#666' }}>
-                {new Date(transaction.date).toLocaleDateString('ru-RU')}
-                {transaction.description && ` • ${transaction.description}`}
-              </div>
-            </div>
-          </div>
-          
-          <div
-            style={{
-              color: transaction.type === 'income' ? '#28a745' : '#dc3545',
-              fontWeight: 'bold'
-            }}
-          >
-            {transaction.type === 'income' ? '+' : '-'}{formatCurrency(Number(transaction.amount))} ₽
-          </div>
-        </div>
-      ))}
     </div>
   );
 };

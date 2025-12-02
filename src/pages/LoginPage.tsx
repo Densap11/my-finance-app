@@ -35,7 +35,7 @@ const LoginPage: React.FC = () => {
 
   return (
     <div className="login-page">
-      <h1>Вход в систему</h1>
+      <h1 style={{color:'white',}}>Вход в систему</h1>
       
       {/* Красивое отображение ошибки */}
       {error && (
@@ -67,32 +67,34 @@ const LoginPage: React.FC = () => {
       
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Email:</label>
+          <label style={{color:'white'}}>Email:</label>
           <input
             type="email"
             value={formData.email}
             onChange={(e) => setFormData({...formData, email: e.target.value})}
             required
             disabled={isLoading}
+            className='login-input'
           />
         </div>
         <div>
-          <label>Пароль:</label>
+          <label style={{color:'white'}}>Пароль:</label>
           <input
             type="password"
             value={formData.password}
             onChange={(e) => setFormData({...formData, password: e.target.value})}
             required
             disabled={isLoading}
+            className='login-input'
           />
         </div>
-        <button type="submit" disabled={isLoading}>
+        <button type="submit" disabled={isLoading} className='login-btn'>
           {isLoading ? 'Вход...' : 'Войти'}
         </button>
       </form>
       
-      <p style={{ marginTop: '20px', textAlign: 'center' }}>
-        Нет аккаунта? <Link to="/register">Зарегистрируйтесь</Link>
+      <p style={{ marginTop: '20px', textAlign: 'center', color:'white' }}>
+        Нет аккаунта? <Link to="/register" style={{color: '#AFF019',}}>Зарегистрируйтесь</Link>
       </p>
     </div>
   );

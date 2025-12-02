@@ -40,47 +40,36 @@ const StatisticsCards: React.FC<StatisticsCardsProps> = ({ transactions }) => {
     subtitle: string;
     color: string;
   }> = ({ title, value, subtitle, color }) => (
-    <div style={{
-      padding: '20px',
-      border: '1px solid #ddd',
-      borderRadius: '8px',
-      backgroundColor: 'white',
-      textAlign: 'center'
-    }}>
-      <div style={{ fontSize: '14px', color: '#666', marginBottom: '8px' }}>{title}</div>
-      <div style={{ fontSize: '24px', fontWeight: 'bold', color, marginBottom: '4px' }}>
+    <div className='dashboard-statcard'>
+      <div style={{ fontSize: '15px', color: '#A6A6A6', marginBottom: '8px' }}>{title}</div>
+      <div style={{ fontSize: '30px', fontWeight: 'bold', color, marginBottom: '4px' }}>
         {value}
       </div>
-      <div style={{ fontSize: '12px', color: '#999' }}>{subtitle}</div>
+      <div style={{ fontSize: '12px', color: '#A6A6A6' }}>{subtitle}</div>
     </div>
   );
 
   return (
-    <div style={{
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-      gap: '15px',
-      marginBottom: '20px'
-    }}>
+    <div className='dashboard-statcard-cont'>
       <StatCard
         title="Общий баланс"
         value={`${stats.balance >= 0 ? '+' : ''}${formatCurrency(stats.balance)} ₽`}
         subtitle="За все время"
-        color={stats.balance >= 0 ? '#28a745' : '#dc3545'}
+        color={stats.balance >= 0 ? '#AFF019' : '#F08819'}
       />
       
       <StatCard
         title="Доходы"
         value={`+${formatCurrency(stats.totalIncome)} ₽`}
         subtitle={`${stats.incomeCount} транзакций`}
-        color="#28a745"
+        color="#AFF019"
       />
       
       <StatCard
         title="Расходы"
         value={`-${formatCurrency(stats.totalExpense)} ₽`}
         subtitle={`${stats.expenseCount} транзакций`}
-        color="#dc3545"
+        color="#F08819"
       />
       
       <StatCard

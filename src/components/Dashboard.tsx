@@ -16,7 +16,6 @@ interface DashboardProps {
 }
 
 const Dashboard: React.FC<DashboardProps> = ({
-  userName,
   transactions,
   isLoading,
   isLoadingTransactions,
@@ -26,7 +25,7 @@ const Dashboard: React.FC<DashboardProps> = ({
 }) => {
   return (
     <div >
-      <Header userName={userName} onLogout={onLogout} />
+      <Header onLogout={onLogout} />
       <div className="dashboard">
       <BalanceCard transactions={transactions} />
 

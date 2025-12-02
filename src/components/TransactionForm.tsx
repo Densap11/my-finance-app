@@ -73,10 +73,12 @@ const TransactionForm: React.FC<TransactionFormProps> = ({ onSubmit, isLoading =
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', margin: '0'}}>
           <div>
             <label className='transaction-form-lable'>Сумма:</label>
-            <input className='transaction-form-input'
+            <input 
+              className='transaction-form-input'
               type="number"
               step="100"
               value={formData.amount}
+              onChange={(e) => setFormData({ ...formData, amount: e.target.value })} // ДОБАВИЛ ЭТУ СТРОКУ
               required
               disabled={isLoading}
               placeholder="0.00"

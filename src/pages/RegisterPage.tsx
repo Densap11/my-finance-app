@@ -76,52 +76,56 @@ const RegisterPage: React.FC = () => {
       
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Имя:</label>
+          <label style={{color: 'white'}}>Имя:</label>
           <input
             type="text"
             value={formData.name}
             onChange={(e) => setFormData({...formData, name: e.target.value})}
             required
             disabled={isLoading}
+            className='login-input'
           />
         </div>
         <div>
-          <label>Email:</label>
+          <label style={{color: 'white'}}>Email:</label>
           <input
             type="email"
             value={formData.email}
             onChange={(e) => setFormData({...formData, email: e.target.value})}
             required
             disabled={isLoading}
+            className='login-input'
           />
         </div>
         <div>
-          <label>Пароль:</label>
+          <label style={{color: 'white'}}>Пароль:</label>
           <input
             type="password"
             value={formData.password}
             onChange={(e) => setFormData({...formData, password: e.target.value})}
             required
             disabled={isLoading}
+            className='login-input'
           />
         </div>
         <div>
-          <label>Подтвердите пароль:</label>
+          <label style={{color: 'white'}}>Подтвердите пароль:</label>
           <input
             type="password"
             value={formData.confirmPassword}
             onChange={(e) => setFormData({...formData, confirmPassword: e.target.value})}
             required
             disabled={isLoading}
+            className='login-input'
           />
         </div>
-        <button type="submit" disabled={isLoading}>
+        <button type="submit" disabled={isLoading} className='login-btn'>
           {isLoading ? 'Регистрация...' : 'Зарегистрироваться'}
         </button>
       </form>
       
       <p style={{ marginTop: '20px', textAlign: 'center' }}>
-        Уже есть аккаунт? <Link to="/login">Войдите</Link>
+        Уже есть аккаунт? <Link to="/login" style={{color:'#AFF019'}}>Войдите</Link>
       </p>
     </div>
   );
